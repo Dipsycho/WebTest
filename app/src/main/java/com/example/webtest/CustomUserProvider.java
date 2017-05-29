@@ -1,5 +1,10 @@
 package com.example.webtest;
 
+import com.avos.avoscloud.AVException;
+import com.avos.avoscloud.AVQuery;
+import com.avos.avoscloud.AVUser;
+import com.avos.avoscloud.FindCallback;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,11 +33,35 @@ public class CustomUserProvider implements LCChatProfileProvider {
 
     // 此数据均为模拟数据，仅供参考
     static {
-        partUsers.add(new LCChatKitUser("Tom", "Tom", "http://www.avatarsdb.com/avatars/tom_and_jerry2.jpg"));
-        partUsers.add(new LCChatKitUser("Jerry", "Jerry", "http://www.avatarsdb.com/avatars/jerry.jpg"));
-        partUsers.add(new LCChatKitUser("Harry", "Harry", "http://www.avatarsdb.com/avatars/young_harry.jpg"));
-        partUsers.add(new LCChatKitUser("William", "William", "http://www.avatarsdb.com/avatars/william_shakespeare.jpg"));
-        partUsers.add(new LCChatKitUser("Bob", "Bob", "http://www.avatarsdb.com/avatars/bath_bob.jpg"));
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+
+
+
+                AVQuery<AVUser> userQuery = new AVQuery<>("_User");
+                userQuery.findInBackground(new FindCallback<AVUser>() {
+                    @Override
+                    public void done(List<AVUser> list, AVException e) {
+                        for (int i = 0; i < list.size(); i++) {
+                            partUsers.add(new LCChatKitUser(list.get(i).getUsername(), list.get(i).getUsername(),null));
+                        }
+                    }
+                });
+
+
+
+            }
+        }).start();
+
+
+//        partUsers.add(new LCChatKitUser("710565214", "710565214", "http://www.avatarsdb.com/avatars/tom_and_jerry2.jpg"));
+//        partUsers.add(new LCChatKitUser("1234567", "1234567", "http://www.avatarsdb.com/avatars/jerry.jpg"));
+//        partUsers.add(new LCChatKitUser("Harry", "Harry", "http://www.avatarsdb.com/avatars/young_harry.jpg"));
+//        partUsers.add(new LCChatKitUser("William", "William", "http://www.avatarsdb.com/avatars/william_shakespeare.jpg"));
+//        partUsers.add(new LCChatKitUser("Bob", "Bob", "http://www.avatarsdb.com/avatars/bath_bob.jpg"));
+
+
     }
 
     @Override

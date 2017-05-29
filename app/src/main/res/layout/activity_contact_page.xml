@@ -6,4 +6,10 @@
     android:layout_height="match_parent"
     tools:context="com.example.webtest.ContactPage">
 
+    <fragment
+        android:id="@+id/fragment2"
+        android:name="cn.leancloud.chatkit.activity.LCIMConversationListFragment"
+        android:layout_width="0dp"
+        android:layout_height="match_parent" />
+
 </android.support.constraint.ConstraintLayout>
