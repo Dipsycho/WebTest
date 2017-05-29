@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/imageIndoWindow"
+        android:layout_width="216dp"
+        android:layout_height="101dp"
+        app:srcCompat="@drawable/avoscloud_feedback_user_reply_background"
+        tools:layout_editor_absoluteX="90dp"
+        tools:layout_editor_absoluteY="224dp" />
+
+    <TextView
+        android:id="@+id/textInfoWindow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="0dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginTop="2dp"
+        android:maxEms="6"
+        android:text="中国四川省成都市金牛区星辉东路23号"
+        app:layout_constraintBottom_toBottomOf="@+id/imageIndoWindow"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintLeft_toLeftOf="@+id/imageIndoWindow"
+        app:layout_constraintRight_toRightOf="@+id/imageIndoWindow"
+        app:layout_constraintTop_toTopOf="@+id/imageIndoWindow"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/buttonInfoWindow"
+        android:layout_width="58dp"
+        android:layout_height="45dp"
+        android:layout_marginBottom="0dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginTop="0dp"
+        android:text="OK"
+        app:layout_constraintBottom_toBottomOf="@+id/imageIndoWindow"
+        app:layout_constraintRight_toRightOf="@+id/imageIndoWindow"
+        app:layout_constraintTop_toTopOf="@+id/textInfoWindow"
+        app:layout_constraintVertical_bias="0.0" />
+
+</android.support.constraint.ConstraintLayout>
