@@ -400,7 +400,7 @@ public class MapMain extends BaseActivity implements View.OnClickListener {
             super.onBackPressed();
         }else
         {
-            Toast.makeText(this,"再按一次推出",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,"再按一次退出",Toast.LENGTH_SHORT).show();
         }
         lastTime=currentTime;
     }
