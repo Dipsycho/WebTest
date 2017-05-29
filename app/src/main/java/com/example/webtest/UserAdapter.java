@@ -105,47 +105,51 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
         holder.talkTo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                switch (helpEachOther.getTalkUser()) {
-                    case 1:
-                        Toast.makeText(mcontext, "正在联系接受者", Toast.LENGTH_SHORT).show();
+                if (helpEachOther.getHistory() == 0) {
+                    Toast.makeText(mcontext,"暂无接受人",Toast.LENGTH_SHORT).show();
+                } else {
+                    switch (helpEachOther.getTalkUser()) {
+                        case 1:
+                            Toast.makeText(mcontext, "正在联系接受者", Toast.LENGTH_SHORT).show();
 
-                        AVUser avUser=new AVUser();
-                        LCChatKit.getInstance().open(avUser.getCurrentUser().getUsername()
-                                , new AVIMClientCallback() {
-                            @Override
-                            public void done(AVIMClient avimClient, AVIMException e) {
-                                if (null == e) {
-                                    Intent intent = new Intent(mcontext, LCIMConversationActivity.class);
-                                    intent.putExtra(LCIMConstants.PEER_ID, helpEachOther.getAcceptUser().getUsername());
-                                    mcontext.startActivity(intent);
-                                } else {
-                                    Toast.makeText(mcontext, e.toString(), Toast.LENGTH_SHORT).show();
-                                }
-                            }
-                        });
-
-                        break;
-                    case 2:
-                        Toast.makeText(mcontext, "正在联系发布者", Toast.LENGTH_SHORT).show();
-
-                        avUser=new AVUser();
-                        LCChatKit.getInstance().open(avUser.getCurrentUser().getUsername()
-                                , new AVIMClientCallback() {
-                                    @Override
-                                    public void done(AVIMClient avimClient, AVIMException e) {
-                                        if (null == e) {
-                                            Intent intent = new Intent(mcontext, LCIMConversationActivity.class);
-                                            intent.putExtra(LCIMConstants.PEER_ID, helpEachOther.getReleaseUser().getUsername());
-                                            mcontext.startActivity(intent);
-                                        } else {
-                                            Toast.makeText(mcontext, e.toString(), Toast.LENGTH_SHORT).show();
+                            AVUser avUser = new AVUser();
+                            LCChatKit.getInstance().open(avUser.getCurrentUser().getUsername()
+                                    , new AVIMClientCallback() {
+                                        @Override
+                                        public void done(AVIMClient avimClient, AVIMException e) {
+                                            if (null == e) {
+                                                Intent intent = new Intent(mcontext, LCIMConversationActivity.class);
+                                                intent.putExtra(LCIMConstants.PEER_ID, helpEachOther.getAcceptUser().getUsername());
+                                                mcontext.startActivity(intent);
+                                            } else {
+                                                Toast.makeText(mcontext, e.toString(), Toast.LENGTH_SHORT).show();
+                                            }
                                         }
-                                    }
-                                });
+                                    });
 
-                        break;
-                    default:
-                        break;
+                            break;
+                        case 2:
+                            Toast.makeText(mcontext, "正在联系发布者", Toast.LENGTH_SHORT).show();
+
+                            avUser = new AVUser();
+                            LCChatKit.getInstance().open(avUser.getCurrentUser().getUsername()
+                                    , new AVIMClientCallback() {
+                                        @Override
+                                        public void done(AVIMClient avimClient, AVIMException e) {
+                                            if (null == e) {
+                                                Intent intent = new Intent(mcontext, LCIMConversationActivity.class);
+                                                intent.putExtra(LCIMConstants.PEER_ID, helpEachOther.getReleaseUser().getUsername());
+                                                mcontext.startActivity(intent);
+                                            } else {
+                                                Toast.makeText(mcontext, e.toString(), Toast.LENGTH_SHORT).show();
+                                            }
+                                        }
+                                    });
+
+                            break;
+                        default:
+                            break;
+                    }
                 }
             }
         });
@@ -153,16 +157,15 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
         holder.helpFinish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (helpEachOther.getHistory()==1) {
+                if (helpEachOther.getHistory() == 1) {
                     Toast.makeText(mcontext, "确认完成帮助", Toast.LENGTH_SHORT).show();
-                }else
-                {
+                } else {
                     Toast.makeText(mcontext, "已删除", Toast.LENGTH_SHORT).show();
                 }
-                objectID=helpEachOther.getObjectIDnumber();
+                objectID = helpEachOther.getObjectIDnumber();
 
-                AVObject help=AVObject.createWithoutData("Help",objectID);
-                help.put("history",2);
+                AVObject help = AVObject.createWithoutData("Help", objectID);
+                help.put("history", 2);
                 help.saveInBackground();
             }
         });
