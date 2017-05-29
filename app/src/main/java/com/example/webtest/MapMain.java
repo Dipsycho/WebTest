@@ -54,6 +54,7 @@ public class MapMain extends BaseActivity implements View.OnClickListener {
     private StringBuilder currentPosition;
     private String location_data;
     private List<HelpEachOther> mhelpEachOtherList = new ArrayList<>();
+    private static long lastTime=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -165,10 +166,8 @@ public class MapMain extends BaseActivity implements View.OnClickListener {
                 startActivity(intentUser);
                 break;
             case R.id.contactWith:
-//                Intent intentContact = new Intent(MapMain.this, ContactPage.class);
-//                startActivity(intentContact);
-
-
+                Intent intentContact = new Intent(MapMain.this, ContactPage.class);
+                startActivity(intentContact);
 
                 break;
             default:
@@ -391,6 +390,19 @@ public class MapMain extends BaseActivity implements View.OnClickListener {
         @Override
         public void onConnectHotSpotMessage(String s, int i) {
         }
+    }
+
+    @Override
+    public void onBackPressed()
+    {
+        long currentTime=System.currentTimeMillis();
+        if (currentTime-lastTime<1000){
+            super.onBackPressed();
+        }else
+        {
+            Toast.makeText(this,"再按一次推出",Toast.LENGTH_SHORT).show();
+        }
+        lastTime=currentTime;
     }
 
     @Override
