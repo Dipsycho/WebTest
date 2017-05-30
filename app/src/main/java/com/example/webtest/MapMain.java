@@ -13,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -72,7 +73,7 @@ public class MapMain extends BaseActivity implements View.OnClickListener {
 
         mapView = (MapView) findViewById(R.id.bmapView);
         positionText = (TextView) findViewById(R.id.detailLocation);
-        Button myLocation = (Button) findViewById(R.id.myLocation);
+        ImageButton myLocation = (ImageButton) findViewById(R.id.myLocation);
         Button askHelp = (Button) findViewById(R.id.askHelp);
         Button giveHelp = (Button) findViewById(R.id.giveHelp);
         Button userInformation = (Button) findViewById(R.id.userInformation);
