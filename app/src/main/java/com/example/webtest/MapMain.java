@@ -4,8 +4,13 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -58,7 +63,8 @@ public class MapMain extends BaseActivity implements View.OnClickListener {
     private StringBuilder currentPosition;
     private String location_data;
     private List<HelpEachOther> mhelpEachOtherList = new ArrayList<>();
-    private static long lastTime=0;
+    private static long lastTime = 0;
+    private DrawerLayout mDrawerLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,10 +83,49 @@ public class MapMain extends BaseActivity implements View.OnClickListener {
         Button askHelp = (Button) findViewById(R.id.askHelp);
         Button giveHelp = (Button) findViewById(R.id.giveHelp);
         Button userInformation = (Button) findViewById(R.id.userInformation);
-        Button contactWith=(Button) findViewById(R.id.contactWith);
+        Button contactWith = (Button) findViewById(R.id.contactWith);
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
 
-        Toolbar toolbar=(Toolbar) findViewById(R.id.toolbarMap);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarMap);
         setSupportActionBar(toolbar);
+
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setHomeAsUpIndicator(R.drawable.ic_menu_white_36dp);
+        }
+
+        navigationView.setNavigationItemSelectedListener(new NavigationView
+                .OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.nav_ask:
+                        Intent intentAsk = new Intent(MapMain.this, HelpPage.class);
+                        intentAsk.putExtra("longitude_data", longitude);
+                        intentAsk.putExtra("latitude_data", latitude);
+                        intentAsk.putExtra("location_data", location_data);
+                        startActivity(intentAsk);
+                        break;
+                    case R.id.nav_give:
+                        Intent intentGive = new Intent(MapMain.this, AcceptPage.class);
+                        startActivity(intentGive);
+                        break;
+                    case R.id.nav_user:
+                        Intent intentUser = new Intent(MapMain.this, UserPage.class);
+                        startActivity(intentUser);
+                        break;
+                    case R.id.nav_contact:
+                        Intent intentContact = new Intent(MapMain.this, ContactPage.class);
+                        startActivity(intentContact);
+                        break;
+                    default:
+                        break;
+                }
+                return false;
+            }
+        });
 
         mapView.getChildAt(2).setPadding(0, 0, 1080 - 180, 220);
         baiduMap = mapView.getMap();
@@ -144,26 +189,26 @@ public class MapMain extends BaseActivity implements View.OnClickListener {
             case R.id.myLocation:
                 toMyLocation();
                 break;
-            case R.id.askHelp:
-                Intent intentAsk = new Intent(MapMain.this, HelpPage.class);
-                intentAsk.putExtra("longitude_data", longitude);
-                intentAsk.putExtra("latitude_data", latitude);
-                intentAsk.putExtra("location_data", location_data);
-                startActivity(intentAsk);
-                break;
-            case R.id.giveHelp:
-                Intent intentGive = new Intent(MapMain.this, AcceptPage.class);
-                startActivity(intentGive);
-                break;
-            case R.id.userInformation:
-                Intent intentUser = new Intent(MapMain.this, UserPage.class);
-                startActivity(intentUser);
-                break;
-            case R.id.contactWith:
-                Intent intentContact = new Intent(MapMain.this, ContactPage.class);
-                startActivity(intentContact);
-
-                break;
+//            case R.id.askHelp:
+//                Intent intentAsk = new Intent(MapMain.this, HelpPage.class);
+//                intentAsk.putExtra("longitude_data", longitude);
+//                intentAsk.putExtra("latitude_data", latitude);
+//                intentAsk.putExtra("location_data", location_data);
+//                startActivity(intentAsk);
+//                break;
+//            case R.id.giveHelp:
+//                Intent intentGive = new Intent(MapMain.this, AcceptPage.class);
+//                startActivity(intentGive);
+//                break;
+//            case R.id.userInformation:
+//                Intent intentUser = new Intent(MapMain.this, UserPage.class);
+//                startActivity(intentUser);
+//                break;
+//            case R.id.contactWith:
+//                Intent intentContact = new Intent(MapMain.this, ContactPage.class);
+//                startActivity(intentContact);
+//
+//                break;
             default:
                 break;
         }
@@ -308,8 +353,7 @@ public class MapMain extends BaseActivity implements View.OnClickListener {
                 Button button = (Button) view.findViewById(R.id.buttonInfoWindow);
                 textView.setText(mhelpEachOtherList.get(num).getContent() + "  " + mhelpEachOtherList.get(num).getLocation());
 
-                if (mhelpEachOtherList.get(num).getHistory()==1)
-                {
+                if (mhelpEachOtherList.get(num).getHistory() == 1) {
                     button.setClickable(false);
                     button.setVisibility(View.GONE);
                 }
@@ -386,44 +430,40 @@ public class MapMain extends BaseActivity implements View.OnClickListener {
     }
 
     @Override
-    public void onBackPressed()
-    {
-        long currentTime=System.currentTimeMillis();
-        if (currentTime-lastTime<1000){
+    public void onBackPressed() {
+        long currentTime = System.currentTimeMillis();
+        if (currentTime - lastTime < 1000) {
             super.onBackPressed();
-        }else
-        {
-            Toast.makeText(this,"再按一次退出",Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, "再按一次退出", Toast.LENGTH_SHORT).show();
         }
-        lastTime=currentTime;
+        lastTime = currentTime;
     }
 
-    public boolean onCreateOptionsMenu(Menu menu)
-    {
-        getMenuInflater().inflate(R.menu.toolbar_map_menu,menu);
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.toolbar_map_menu, menu);
         return true;
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item)
-    {
-        switch (item.getItemId())
-        {
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
             case R.id.showMyLocationDetail:
 
                 break;
             case R.id.showMarks:
-                if (MAKE_MARK)
-                {
+                if (MAKE_MARK) {
                     item.setIcon(R.drawable.ic_visibility_off_white_48dp);
                     clearMap();
-                    MAKE_MARK=!MAKE_MARK;
-                }else
-                {
+                    MAKE_MARK = !MAKE_MARK;
+                } else {
                     item.setIcon(R.drawable.ic_visibility_white_48dp);
                     makeMark();
-                    MAKE_MARK=!MAKE_MARK;
+                    MAKE_MARK = !MAKE_MARK;
                 }
+                break;
+            case android.R.id.home:
+                mDrawerLayout.openDrawer(GravityCompat.START);
                 break;
             default:
                 break;

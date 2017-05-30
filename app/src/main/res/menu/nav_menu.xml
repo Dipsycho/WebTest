@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_ask"
+            android:icon="@drawable/ic_pan_tool_white_48dp"
+            android:title="求助" />
+        <item
+            android:id="@+id/nav_give"
+            android:icon="@drawable/ic_touch_app_white_48dp"
+            android:title="帮助" />
+        <item
+            android:id="@+id/nav_user"
+            android:icon="@drawable/ic_description_white_48dp"
+            android:title="已发出/已接受" />
+        <item
+            android:id="@+id/nav_contact"
+            android:icon="@drawable/ic_question_answer_white_48dp"
+            android:title="联系互助人" />
+        <item
+            android:id="@+id/nav_logout"
+
+            android:title="注销"
+            />
+    </group>
+</menu>
