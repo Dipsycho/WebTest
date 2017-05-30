@@ -96,6 +96,10 @@ public class MapMain extends BaseActivity implements View.OnClickListener {
             actionBar.setHomeAsUpIndicator(R.drawable.ic_menu_white_36dp);
         }
 
+        View headerView=navigationView.getHeaderView(0);
+        TextView userNameHeader = (TextView) headerView.findViewById(R.id.userNameHeader);
+        AVUser avUser = new AVUser();
+        userNameHeader.setText("用户名：" + avUser.getCurrentUser().getUsername());
         navigationView.setNavigationItemSelectedListener(new NavigationView
                 .OnNavigationItemSelectedListener() {
             @Override
