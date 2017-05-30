@@ -120,6 +120,13 @@ public class MapMain extends BaseActivity implements View.OnClickListener {
                         Intent intentContact = new Intent(MapMain.this, ContactPage.class);
                         startActivity(intentContact);
                         break;
+                    case R.id.nav_logout:
+                        AVUser.logOut();
+                        Intent intent = new Intent(MapMain.this, MainActivity.class);
+                        intent.putExtra("logout", 1);
+                        startActivity(intent);
+                        MapMain.this.finish();
+                        break;
                     default:
                         break;
                 }

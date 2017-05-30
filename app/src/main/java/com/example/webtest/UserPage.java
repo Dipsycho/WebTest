@@ -1,11 +1,8 @@
 package com.example.webtest;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
-import android.widget.Button;
 
 import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVObject;
@@ -16,9 +13,9 @@ import com.avos.avoscloud.FindCallback;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class UserPage extends BaseActivity {
 
-    private Button logout;
     private List<HelpEachOther> helpEachOtherListGiven = new ArrayList<>();
     private List<HelpEachOther> helpEachOtherListGot = new ArrayList<>();
     private UserAdapter adapterGiven, adapterGot;
@@ -27,18 +24,6 @@ public class UserPage extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_page);
-
-        logout = (Button) findViewById(R.id.logout);
-        logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AVUser.logOut();
-                Intent intent = new Intent(UserPage.this, MainActivity.class);
-                intent.putExtra("logout", 1);
-                startActivity(intent);
-                UserPage.this.finish();
-            }
-        });
 
         initUserGiven();
         RecyclerView recyclerViewGiven = (RecyclerView) findViewById(R.id.recyclerViewGiven);
