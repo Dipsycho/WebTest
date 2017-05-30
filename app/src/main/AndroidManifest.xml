@@ -72,12 +72,15 @@
 
         <activity
             android:name=".HelpPage"
+            android:label="求助HELP"
             android:launchMode="singleTask" />
         <activity
             android:name=".AcceptPage"
+            android:label="帮助ACCEPT"
             android:launchMode="singleTask" />
         <activity
             android:name=".UserPage"
+            android:label="已发出/已接受"
             android:launchMode="singleTask" />
         <activity android:name=".DetailPage" />
         <activity android:name=".ContactPage"></activity>
