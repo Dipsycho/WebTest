@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -33,6 +34,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         setContentView(R.layout.activity_main);
         Button registerButton = (Button) findViewById(R.id.register);
         Button loginButton = (Button) findViewById(R.id.login);
+
+        Toolbar toolbar=(Toolbar) findViewById(R.id.toolbarLog);
+        setSupportActionBar(toolbar);
+
         nameText = (EditText) findViewById(R.id.name);
         pwText = (EditText) findViewById(R.id.pw);
         pref = PreferenceManager.getDefaultSharedPreferences(this);

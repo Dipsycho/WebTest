@@ -6,6 +6,7 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -77,7 +78,10 @@ public class MapMain extends BaseActivity implements View.OnClickListener {
         Button userInformation = (Button) findViewById(R.id.userInformation);
         Button contactWith=(Button) findViewById(R.id.contactWith);
 
-        mapView.getChildAt(2).setPadding(0, 0, 1080 - 170, 250);
+        Toolbar toolbar=(Toolbar) findViewById(R.id.toolbarMap);
+        setSupportActionBar(toolbar);
+
+        mapView.getChildAt(2).setPadding(0, 0, 1080 - 180, 220);
         baiduMap = mapView.getMap();
         baiduMap.setMyLocationEnabled(true);
 
