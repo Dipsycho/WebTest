@@ -9,6 +9,8 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -71,9 +73,7 @@ public class MapMain extends BaseActivity implements View.OnClickListener {
         mapView = (MapView) findViewById(R.id.bmapView);
         positionText = (TextView) findViewById(R.id.detailLocation);
         Button myLocation = (Button) findViewById(R.id.myLocation);
-        Button markMaker = (Button) findViewById(R.id.markMarker);
         Button askHelp = (Button) findViewById(R.id.askHelp);
-        Button moveMark = (Button) findViewById(R.id.moveMark);
         Button giveHelp = (Button) findViewById(R.id.giveHelp);
         Button userInformation = (Button) findViewById(R.id.userInformation);
         Button contactWith=(Button) findViewById(R.id.contactWith);
@@ -86,10 +86,7 @@ public class MapMain extends BaseActivity implements View.OnClickListener {
         baiduMap.setMyLocationEnabled(true);
 
         myLocation.setOnClickListener(this);
-        markMaker.setOnClickListener(this);
-        markMaker.setOnClickListener(this);
         askHelp.setOnClickListener(this);
-        moveMark.setOnClickListener(this);
         giveHelp.setOnClickListener(this);
         userInformation.setOnClickListener(this);
         contactWith.setOnClickListener(this);
@@ -146,20 +143,12 @@ public class MapMain extends BaseActivity implements View.OnClickListener {
             case R.id.myLocation:
                 toMyLocation();
                 break;
-            case R.id.markMarker:
-                makeMark();
-                MAKE_MARK = true;
-                break;
             case R.id.askHelp:
                 Intent intentAsk = new Intent(MapMain.this, HelpPage.class);
                 intentAsk.putExtra("longitude_data", longitude);
                 intentAsk.putExtra("latitude_data", latitude);
                 intentAsk.putExtra("location_data", location_data);
                 startActivity(intentAsk);
-                break;
-            case R.id.moveMark:
-                clearMap();
-                MAKE_MARK = false;
                 break;
             case R.id.giveHelp:
                 Intent intentGive = new Intent(MapMain.this, AcceptPage.class);
@@ -201,7 +190,6 @@ public class MapMain extends BaseActivity implements View.OnClickListener {
 
     public void clearMap() {
         baiduMap.clear();
-        positionText.setVisibility(View.GONE);
     }
 
     public void makeMark() {
@@ -407,6 +395,39 @@ public class MapMain extends BaseActivity implements View.OnClickListener {
             Toast.makeText(this,"再按一次退出",Toast.LENGTH_SHORT).show();
         }
         lastTime=currentTime;
+    }
+
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        getMenuInflater().inflate(R.menu.toolbar_map_menu,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        switch (item.getItemId())
+        {
+            case R.id.showMyLocationDetail:
+
+                break;
+            case R.id.showMarks:
+                if (MAKE_MARK)
+                {
+                    item.setIcon(R.drawable.ic_visibility_off_white_48dp);
+                    clearMap();
+                    MAKE_MARK=!MAKE_MARK;
+                }else
+                {
+                    item.setIcon(R.drawable.ic_visibility_white_48dp);
+                    makeMark();
+                    MAKE_MARK=!MAKE_MARK;
+                }
+                break;
+            default:
+                break;
+        }
+        return true;
     }
 
     @Override

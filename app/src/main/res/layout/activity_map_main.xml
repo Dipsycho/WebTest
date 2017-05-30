@@ -50,20 +50,6 @@
             android:layout_weight="1"
             android:text="我的位置" />
 
-        <Button
-            android:id="@+id/markMarker"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="创建气泡" />
-
-        <Button
-            android:id="@+id/moveMark"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="消除信息" />
-
     </LinearLayout>
 
     <TextView

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/showMyLocationDetail"
+        android:icon="@drawable/ic_picture_in_picture_white_48dp"
+        android:title="我的详细位置信息"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/showMarks"
+        android:icon="@drawable/ic_visibility_off_white_48dp"
+        android:title="显示标记"
+        app:showAsAction="always" />
+</menu>
