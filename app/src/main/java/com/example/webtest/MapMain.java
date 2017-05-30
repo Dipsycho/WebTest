@@ -80,10 +80,6 @@ public class MapMain extends BaseActivity implements View.OnClickListener {
         mapView = (MapView) findViewById(R.id.bmapView);
         positionText = (TextView) findViewById(R.id.detailLocation);
         ImageButton myLocation = (ImageButton) findViewById(R.id.myLocation);
-        Button askHelp = (Button) findViewById(R.id.askHelp);
-        Button giveHelp = (Button) findViewById(R.id.giveHelp);
-        Button userInformation = (Button) findViewById(R.id.userInformation);
-        Button contactWith = (Button) findViewById(R.id.contactWith);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
 
@@ -138,15 +134,11 @@ public class MapMain extends BaseActivity implements View.OnClickListener {
             }
         });
 
-        mapView.getChildAt(2).setPadding(0, 0, 1080 - 180, 220);
+        mapView.getChildAt(2).setPadding(0, 0, 1080-205,300);
         baiduMap = mapView.getMap();
         baiduMap.setMyLocationEnabled(true);
 
         myLocation.setOnClickListener(this);
-        askHelp.setOnClickListener(this);
-        giveHelp.setOnClickListener(this);
-        userInformation.setOnClickListener(this);
-        contactWith.setOnClickListener(this);
         baiduMap.setOnMarkerClickListener(new BaiduMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
@@ -200,26 +192,6 @@ public class MapMain extends BaseActivity implements View.OnClickListener {
             case R.id.myLocation:
                 toMyLocation();
                 break;
-//            case R.id.askHelp:
-//                Intent intentAsk = new Intent(MapMain.this, HelpPage.class);
-//                intentAsk.putExtra("longitude_data", longitude);
-//                intentAsk.putExtra("latitude_data", latitude);
-//                intentAsk.putExtra("location_data", location_data);
-//                startActivity(intentAsk);
-//                break;
-//            case R.id.giveHelp:
-//                Intent intentGive = new Intent(MapMain.this, AcceptPage.class);
-//                startActivity(intentGive);
-//                break;
-//            case R.id.userInformation:
-//                Intent intentUser = new Intent(MapMain.this, UserPage.class);
-//                startActivity(intentUser);
-//                break;
-//            case R.id.contactWith:
-//                Intent intentContact = new Intent(MapMain.this, ContactPage.class);
-//                startActivity(intentContact);
-//
-//                break;
             default:
                 break;
         }
